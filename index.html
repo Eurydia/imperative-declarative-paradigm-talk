@@ -2,840 +2,451 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>reveal.js – The HTML Presentation Framework</title>
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/hull-blue.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
 
-    <meta
-      name="description"
-      content="A framework for easily creating beautiful presentations using HTML"
-    />
-    <meta name="author" content="Hakim El Hattab" />
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <script defer src="dist/fontawesome/all.min.js"></script>
 
-    <link rel="stylesheet" href="./dist/reset.css" />
-    <link rel="stylesheet" href="./dist/reveal.css" />
-    <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="./plugin/highlight/monokai.css" />
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
   </head>
-
   <body>
     <div class="reveal">
-      <!-- Any section element inside of this container is displayed as a slide -->
-      <div class="slides">
-        <section>
-          <a href="https://revealjs.com">
-            <img
-              src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg"
-              alt="reveal.js logo"
-              style="
-                height: 180px;
-                margin: 0 auto 4rem auto;
-                background: transparent;
-              "
-              class="demo-logo"
-            />
-          </a>
-          <h3>The HTML Presentation Framework</h3>
-          <p>
-            <small
-              >Created by
-              <a href="http://hakim.se">Hakim El Hattab</a> and
-              <a
-                href="https://github.com/hakimel/reveal.js/graphs/contributors"
-                >contributors</a
-              ></small
-            >
-          </p>
-        </section>
+      <div class="slides"><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Hello There</h2>
-          <p>
-            reveal.js enables you to create beautiful interactive
-            slide decks using HTML. This presentation will show you
-            examples of what it can do.
-          </p>
-        </section>
+**bit.ly/3DKbqRq** 
 
-        <!-- Example of nested vertical slides -->
-        <section>
-          <section>
-            <h2>Vertical Slides</h2>
-            <p>Slides can be nested inside of each other.</p>
-            <p>
-              Use the <em>Space</em> key to navigate through all
-              slides.
-            </p>
-            <br />
-            <a href="#/2/1" class="navigate-down">
-              <img
-                class="r-frame"
-                style="background: rgba(255, 255, 255, 0.1)"
-                width="178"
-                height="238"
-                data-src="https://static.slid.es/reveal/arrow.png"
-                alt="Down arrow"
-              />
-            </a>
-          </section>
-          <section>
-            <h2>Basement Level 1</h2>
-            <p>
-              Nested slides are useful for adding additional detail
-              underneath a high level horizontal slide.
-            </p>
-          </section>
-          <section>
-            <h2>Basement Level 2</h2>
-            <p>That's it, time to go back up.</p>
-            <br />
-            <a href="#/2">
-              <img
-                class="r-frame"
-                style="
-                  background: rgba(255, 255, 255, 0.1);
-                  transform: rotate(180deg);
-                "
-                width="178"
-                height="238"
-                data-src="https://static.slid.es/reveal/arrow.png"
-                alt="Up arrow"
-              />
-            </a>
-          </section>
-        </section>
+(Case sensitive)
 
-        <section>
-          <h2>Slides</h2>
-          <p>
-            Not a coder? Not a problem. There's a fully-featured
-            visual editor for authoring these, try it out at
-            <a href="https://slides.com" target="_blank"
-              >https://slides.com</a
-            >.
-          </p>
-        </section>
+<img src="2022-01/Intermediate English/Presentation on IT topic/assets/shorten_qr_code.png" alt="" style="width: 600px; object-fit: fill">
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section data-visibility="hidden">
-          <h2>Hidden Slides</h2>
-          <p>
-            This slide is visible in the source, but hidden when the
-            presentation is viewed. You can show all hidden slides by
-            setting the `showHiddenSlides` config option to `true`.
-          </p>
-        </section>
+# Imperative & Declarative Paradigm
 
-        <section data-auto-animate>
-          <h2 data-id="code-title">Pretty Code</h2>
-          <pre
-            data-id="code-animation"
-          ><code class="hljs" data-trim data-line-numbers>
-						import React, { useState } from 'react';
+Don't worry about it. 
 
-						function Example() {
-						  const [count, setCount] = useState(0);
+<aside class="notes"><p><em>Main concept</em>: <strong>Programming paradigms are just coding styles</strong></p>
+<p><em>Tone</em>: normal; slow and steady;</p>
+<p>In this talk, I will demystify the concept of programming paradigms
+More specficially, I will focus on the imperative and the declarative styles.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-						  return (
-						    ...
-						  );
-						}
-					</code></pre>
-          <p>
-            Code syntax highlighting courtesy of
-            <a href="https://highlightjs.org/usage/">highlight.js</a>.
-          </p>
-        </section>
+# Outline
 
-        <section data-auto-animate>
-          <h2 data-id="code-title">With animations</h2>
-          <pre
-            data-id="code-animation"
-          ><code class="hljs" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
-						import React, { useState } from 'react';
+- What is a Programming Paradigm?
+- **Impearative** and **Declarative** Paradigms
+- Practical Example
+- Summary
+- Ask me Questions!
 
-						function Example() {
-						  const [count, setCount] = useState(0);
+<aside class="notes"><p>Here is the structure of my talk.</p>
+<p>I will start by answering the question of what paradigms are.
+Then I talk about the two major paradigms.
+We will look at a practical example. 
+I summarize what we have discussed.
+Finally, we will have a short Q&amp;A session at the end.</p>
+<p>Okay, let us begin.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-						  return (
-						    <div>
-						      <p>You clicked {count} times</p>
-						      <button onClick={() => setCount(count + 1)}>
-						        Click me
-						      </button>
-						    </div>
-						  );
-						}
+# Q: What is it?
 
-						function SecondExample() {
-						  const [count, setCount] = useState(0);
+A: It is a manner in which we solve problems.
 
-						  return (
-						    <div>
-						      <p>You clicked {count} times</p>
-						      <button onClick={() => setCount(count + 1)}>
-						        Click me
-						      </button>
-						    </div>
-						  );
-						}
-					</script></code></pre>
-        </section>
+<aside class="notes"><p>What is a paradigm?</p>
+<p>In the simplest terms, a paradigm is a way we solve problems.
+This definition might be too vague for some of you.
+Not to worry.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Point of View</h2>
-          <p>
-            Press <strong>ESC</strong> to enter the slide overview.
-          </p>
-          <p>
-            Hold down the <strong>alt</strong> key (<strong
-              >ctrl</strong
-            >
-            in Linux) and click on any element to zoom towards it
-            using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>.
-            Click again to zoom back out.
-          </p>
-          <p>(NOTE: Use ctrl + click in Linux.)</p>
-        </section>
+**Solve this system of equations**
 
-        <section
-          data-auto-animate
-          data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
-        >
-          <h2>Auto-Animate</h2>
-          <p>
-            Automatically animate matching elements across slides with
-            <a href="https://revealjs.com/auto-animate/"
-              >Auto-Animate</a
-            >.
-          </p>
-          <div class="r-hstack justify-center">
-            <div
-              data-id="box1"
-              style="
-                background: #999;
-                width: 50px;
-                height: 50px;
-                margin: 10px;
-                border-radius: 5px;
-              "
-            ></div>
-            <div
-              data-id="box2"
-              style="
-                background: #999;
-                width: 50px;
-                height: 50px;
-                margin: 10px;
-                border-radius: 5px;
-              "
-            ></div>
-            <div
-              data-id="box3"
-              style="
-                background: #999;
-                width: 50px;
-                height: 50px;
-                margin: 10px;
-                border-radius: 5px;
-              "
-            ></div>
-          </div>
-        </section>
-        <section
-          data-auto-animate
-          data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
-        >
-          <div class="r-hstack justify-center">
-            <div
-              data-id="box1"
-              data-auto-animate-delay="0"
-              style="
-                background: cyan;
-                width: 150px;
-                height: 100px;
-                margin: 10px;
-              "
-            ></div>
-            <div
-              data-id="box2"
-              data-auto-animate-delay="0.1"
-              style="
-                background: magenta;
-                width: 150px;
-                height: 100px;
-                margin: 10px;
-              "
-            ></div>
-            <div
-              data-id="box3"
-              data-auto-animate-delay="0.2"
-              style="
-                background: yellow;
-                width: 150px;
-                height: 100px;
-                margin: 10px;
-              "
-            ></div>
-          </div>
-          <h2 style="margin-top: 20px">Auto-Animate</h2>
-        </section>
-        <section
-          data-auto-animate
-          data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
-        >
-          <div class="r-stack">
-            <div
-              data-id="box1"
-              style="
-                background: cyan;
-                width: 300px;
-                height: 300px;
-                border-radius: 200px;
-              "
-            ></div>
-            <div
-              data-id="box2"
-              style="
-                background: magenta;
-                width: 200px;
-                height: 200px;
-                border-radius: 200px;
-              "
-            ></div>
-            <div
-              data-id="box3"
-              style="
-                background: yellow;
-                width: 100px;
-                height: 100px;
-                border-radius: 200px;
-              "
-            ></div>
-          </div>
-          <h2 style="margin-top: 20px">Auto-Animate</h2>
-        </section>
+`$\begin{align*} x + y &= 8 \tag {a}\\ y &= 2(x - 1)\tag {b}\\ \end{align*}$`
 
-        <section>
-          <h2>Touch Optimized</h2>
-          <p>
-            Presentations look great on touch devices, like mobile
-            phones and tablets. Simply swipe through your slides.
-          </p>
-        </section>
+<aside class="notes"><p>Let&#39;s say we have to solve a system of two equations. 
+We have Equation <code>$(a)$</code> and Equation <code>$(b)$</code>.</p>
+<p>How would one solve it?</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section data-markdown>
-          <script type="text/template">
-            ## Markdown support
+Via **substitution**
 
-            Write content using inline or external Markdown.
-            Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+`$\begin{align*} x + y &= 8 \tag {a}\\ y &= 2(x - 1)\tag {b}\\ \end{align*}$`
 
-            ```html []
-            <section data-markdown>
-              ## Markdown support
+`$\begin{align*} x + 2x - 2 &= 8\\ 3x &= 6\\ x &= 2 \tag {sol} \end{align*}$`
 
-              Write content using inline or external Markdown.
-              Instructions and more info available in the [docs](https://revealjs.com/markdown/).
-            </section>
-            ```
-          </script>
-        </section>
+<aside class="notes"><p>We can <strong>substitute</strong> the <code>$y$</code> in Equation <code>$(a)$</code> with the right hand side of Equation <code>$(b)$</code>. 
+Solve for <code>$x$</code>, and that is it.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <p>
-            Add the <code>r-fit-text</code> class to auto-size text
-          </p>
-          <h2 class="r-fit-text">FIT TEXT</h2>
-        </section>
+Via **Elimination**
 
-        <section>
-          <section id="fragments">
-            <h2>Fragments</h2>
-            <p>Hit the next arrow...</p>
-            <p class="fragment">... to step through ...</p>
-            <p>
-              <span class="fragment">... a</span>
-              <span class="fragment">fragmented</span>
-              <span class="fragment">slide.</span>
-            </p>
+`$\begin{align*} x + y &= 8 \tag {a}\\ y &= 2(x - 1)\tag {b}\\ \end{align*}$`
 
-            <aside class="notes">
-              This slide has fragments which are also stepped through
-              in the notes window.
-            </aside>
-          </section>
-          <section>
-            <h2>Fragment Styles</h2>
-            <p>There's different types of fragments, like:</p>
-            <p class="fragment grow">grow</p>
-            <p class="fragment shrink">shrink</p>
-            <p class="fragment fade-out">fade-out</p>
-            <p>
-              <span
-                style="display: inline-block"
-                class="fragment fade-right"
-                >fade-right,
-              </span>
-              <span
-                style="display: inline-block"
-                class="fragment fade-up"
-                >up,
-              </span>
-              <span
-                style="display: inline-block"
-                class="fragment fade-down"
-                >down,
-              </span>
-              <span
-                style="display: inline-block"
-                class="fragment fade-left"
-                >left</span
-              >
-            </p>
-            <p class="fragment fade-in-then-out">fade-in-then-out</p>
-            <p class="fragment fade-in-then-semi-out">
-              fade-in-then-semi-out
-            </p>
-            <p>
-              Highlight
-              <span class="fragment highlight-red">red</span>
-              <span class="fragment highlight-blue">blue</span>
-              <span class="fragment highlight-green">green</span>
-            </p>
-          </section>
-        </section>
+`$\begin{align*} x \cancel {+ y - y} &= 8 - 2x - 2\\	x &= 6 - 2x\\ 3x &= 6\\ x &= 2 \tag {sol} \end{align*}$`
 
-        <section id="transitions">
-          <h2>Transition Styles</h2>
-          <p>
-            You can select from different transitions, like: <br />
-            <a href="?transition=none#/transitions">None</a> -
-            <a href="?transition=fade#/transitions">Fade</a> -
-            <a href="?transition=slide#/transitions">Slide</a> -
-            <a href="?transition=convex#/transitions">Convex</a> -
-            <a href="?transition=concave#/transitions">Concave</a> -
-            <a href="?transition=zoom#/transitions">Zoom</a>
-          </p>
-        </section>
+<aside class="notes"><p>But we can also <strong>subtract</strong> Equation <code>$(b)$</code> from Equation <code>$(a)$</code>.
+This method gives the same value of <code>$x$</code>.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section id="themes">
-          <h2>Themes</h2>
-          <p>
-            reveal.js comes with a few themes built in: <br />
-            <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/black.css'); return false;"
-              >Black (default)</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/white.css'); return false;"
-              >White</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/league.css'); return false;"
-              >League</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/sky.css'); return false;"
-              >Sky</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/beige.css'); return false;"
-              >Beige</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/simple.css'); return false;"
-              >Simple</a
-            >
-            <br />
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/serif.css'); return false;"
-              >Serif</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/blood.css'); return false;"
-              >Blood</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/night.css'); return false;"
-              >Night</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/moon.css'); return false;"
-              >Moon</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','dist/theme/solarized.css'); return false;"
-              >Solarized</a
-            >
-          </p>
-        </section>
+Substitute `$x$` with `$2$` in Equation `$(a)$`
 
-        <section>
-          <section data-background="#dddddd">
-            <h2>Slide Backgrounds</h2>
-            <p>
-              Set <code>data-background="#dddddd"</code> on a slide to
-              change the background color. All CSS color formats are
-              supported.
-            </p>
-            <a href="#" class="navigate-down">
-              <img
-                class="r-frame"
-                style="background: rgba(255, 255, 255, 0.1)"
-                width="178"
-                height="238"
-                data-src="https://static.slid.es/reveal/arrow.png"
-                alt="Down arrow"
-              />
-            </a>
-          </section>
-          <section
-            data-background-gradient="linear-gradient(to bottom, #283b95, #17b2c3)"
-          >
-            <h2>Gradient Backgrounds</h2>
-            <pre><code class="hljs html wrap">&lt;section data-background-gradient=
-							"linear-gradient(to bottom, #ddd, #191919)"&gt;</code></pre>
-          </section>
-          <section
-            data-background="https://static.slid.es/reveal/image-placeholder.png"
-          >
-            <h2>Image Backgrounds</h2>
-            <pre><code class="hljs html">&lt;section data-background="image.png"&gt;</code></pre>
-          </section>
-          <section
-            data-background="https://static.slid.es/reveal/image-placeholder.png"
-            data-background-repeat="repeat"
-            data-background-size="100px"
-          >
-            <h2>Tiled Backgrounds</h2>
-            <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-          </section>
-          <section
-            data-background-video="https://static.slid.es/site/homepage/v1/homepage-video-editor.mp4"
-            data-background-color="#000000"
-          >
-            <div
-              style="
-                background-color: rgba(0, 0, 0, 0.9);
-                color: #fff;
-                padding: 20px;
-              "
-            >
-              <h2>Video Backgrounds</h2>
-              <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-            </div>
-          </section>
-          <section
-            data-background="http://i.giphy.com/90F8aUepslB84.gif"
-          >
-            <h2>... and GIFs!</h2>
-          </section>
-        </section>
+`$\begin{align*}x + y &= 8 \tag {a} \end{align*}$`
 
-        <section
-          data-transition="slide"
-          data-background="#4d7e65"
-          data-background-transition="zoom"
-        >
-          <h2>Background Transitions</h2>
-          <p>
-            Different background transitions are available via the
-            backgroundTransition option. This one's called "zoom".
-          </p>
-          <pre><code class="hljs javascript">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-        </section>
+`$\begin{align*} 2 + y &= 8\\ y &= 6\\ \end{align*}$`
 
-        <section
-          data-transition="slide"
-          data-background="#b5533c"
-          data-background-transition="zoom"
-        >
-          <h2>Background Transitions</h2>
-          <p>You can override background transitions per-slide.</p>
-          <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-        </section>
+`$\therefore (2, 6)$`
 
-        <section
-          data-background-iframe="https://hakim.se"
-          data-background-interactive
-        >
-          <div
-            style="
-              position: absolute;
-              width: 40%;
-              right: 0;
-              box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5),
-                0 5px 25px rgba(0, 0, 0, 0.2);
-              background-color: rgba(0, 0, 0, 0.9);
-              color: #fff;
-              padding: 20px;
-              font-size: 20px;
-              text-align: left;
-            "
-          >
-            <h2>Iframe Backgrounds</h2>
-            <p>
-              Since reveal.js runs on the web, you can easily embed
-              other web content. Try interacting with the page in the
-              background.
-            </p>
-          </div>
-        </section>
+<aside class="notes"><p>Let <code>$x$</code> in Equation <code>$(a)$</code> be <code>$2$</code>.
+Our <code>$y$</code> is <code>$6$</code>.
+The sole solution is at <code>$(2, 6)$</code>.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Marvelous List</h2>
-          <ul>
-            <li>No order here</li>
-            <li>Or here</li>
-            <li>Or here</li>
-            <li>Or here</li>
-          </ul>
-        </section>
+**Paradigm** [par-*uh*-dahym]
 
-        <section>
-          <h2>Fantastic Ordered List</h2>
-          <ol>
-            <li>One is smaller than...</li>
-            <li>Two is smaller than...</li>
-            <li>Three!</li>
-          </ol>
-        </section>
+(n.) A fancy word for approach.
 
-        <section>
-          <h2>Tabular Tables</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Value</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Apples</td>
-                <td>$1</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td>Lemonade</td>
-                <td>$2</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>Bread</td>
-                <td>$3</td>
-                <td>2</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+<aside class="notes"><p>The word <strong>paradigm</strong> is just a way of saying approach.</p>
+<p>We can take the substitution <em>approach</em> to solve the system.
+But the elimination <em>approach</em> works just as well.
+Because in the end, they will take you to the same answer.</p>
+<p>A paradigm is the <em>approach</em> or <em>approaches</em> we take to complete a task.
+It might be based entirely on matters of preference.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Clever Quotes</h2>
-          <p>
-            These guys come in two forms, inline:
-            <q
-              cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations"
-              >The nice thing about standards is that there are so
-              many to choose from</q
-            >
-            and block:
-          </p>
-          <blockquote
-            cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations"
-          >
-            &ldquo;For years there has been a theory that millions of
-            monkeys typing at random on millions of typewriters would
-            reproduce the entire works of Shakespeare. The Internet
-            has proven this theory to be untrue.&rdquo;
-          </blockquote>
-        </section>
+**The imperative paradigm**
 
-        <section>
-          <h2>Intergalactic Interconnections</h2>
-          <p>
-            You can link between slides internally,
-            <a href="#/2/3">like this</a>.
-          </p>
-        </section>
+and
 
-        <section>
-          <h2>Speaker View</h2>
-          <p>
-            There's a
-            <a href="https://revealjs.com/speaker-view/"
-              >speaker view</a
-            >. It includes a timer, preview of the upcoming slide as
-            well as your speaker notes.
-          </p>
-          <p>Press the <em>S</em> key to try it out.</p>
+**The declarative paradigm**
 
-          <aside class="notes">
-            Oh hey, these are some notes. They'll be hidden in your
-            presentation, but you can see them if you open the speaker
-            notes window (hit 's' on your keyboard).
-          </aside>
-        </section>
+<aside class="notes"><p>Now that you know what paradigms are.
+I will move on to the main event of this talk.</p>
+<p>Before I go into the details, I will give you another example.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Export to PDF</h2>
-          <p>
-            Presentations can be
-            <a href="https://revealjs.com/pdf-export/"
-              >exported to PDF</a
-            >, here's an example:
-          </p>
-          <iframe
-            data-src="https://www.slideshare.net/slideshow/embed_code/42840540"
-            width="445"
-            height="355"
-            frameborder="0"
-            marginwidth="0"
-            marginheight="0"
-            scrolling="no"
-            style="
-              border: 3px solid #666;
-              margin-bottom: 5px;
-              max-width: 100%;
-            "
-            allowfullscreen
-          >
-          </iframe>
-        </section>
+### At a busy resturant
 
-        <section>
-          <h2>Global State</h2>
-          <p>
-            Set <code>data-state="something"</code> on a slide and
-            <code>"something"</code>
-            will be added as a class to the document element when the
-            slide is open. This lets you apply broader style changes,
-            like switching the page background.
-          </p>
-        </section>
+*chatter fills the air*
 
-        <section data-state="customevent">
-          <h2>State Events</h2>
-          <p>
-            Additionally custom events can be triggered on a per slide
-            basis by binding to the <code>data-state</code> name.
-          </p>
-          <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.on( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-        </section>
+<aside class="notes"><p>Picture a busy restaurant, bustling with people.</p>
+<p>A couple walks in through the front door.
+The wife spots an empty table, turns to the husband, and says</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-        <section>
-          <h2>Take a Moment</h2>
-          <p>
-            Press B or . on your keyboard to pause the presentation.
-            This is helpful when you're on stage and want to take
-            distracting slides off the screen.
-          </p>
-        </section>
+### *How*
 
-        <section>
-          <h2>Much more</h2>
-          <ul>
-            <li>Right-to-left support</li>
-            <li>
-              <a href="https://revealjs.com/api/"
-                >Extensive JavaScript API</a
-              >
-            </li>
-            <li>
-              <a href="https://revealjs.com/auto-slide/"
-                >Auto-progression</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://revealjs.com/backgrounds/#parallax-background"
-                >Parallax backgrounds</a
-              >
-            </li>
-            <li>
-              <a href="https://revealjs.com/keyboard/"
-                >Custom keyboard bindings</a
-              >
-            </li>
-          </ul>
-        </section>
+<img src="2022-01/Intermediate English/Presentation on IT topic/assets/resturant_imperative.png" alt="" style="width: 480px; object-fit: fill">
 
-        <section style="text-align: left">
-          <h1>THE END</h1>
-          <p>
-            - <a href="https://slides.com">Try the online editor</a>
-            <br />
-            -
-            <a href="https://github.com/hakimel/reveal.js"
-              >Source code &amp; documentation</a
-            >
-          </p>
-        </section>
-      </div>
+
+> "I saw an empty table.
+> Turn right at the reception. 
+> Walk past one table.
+> Turn left.
+> Walk to the back.
+>The table will be on our right."
+
+
+<aside class="notes"><p>The wife gives exact instructions on <em>how</em> to navigate to the table.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### At the same resturant
+
+*thirty minutes later*
+
+<aside class="notes"><p>A little while later, another couple walks in.</p>
+<p>This time neither the husband nor the wife can spot an empty table.
+The wife walks up to the reception and says</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### *What*
+
+<img src="2022-01/Intermediate English/Presentation on IT topic/assets/resturant_declarative.png" alt="" style="width: 480px; object-fit: fill">
+
+
+> "Table for two, please. 😊"
+
+<aside class="notes"><p>This time, the wife states <em>what</em> she wants.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<aside class="notes"><p>That was differenece between paradigm.</p>
+<p>The first wife used <strong>the imperative approach</strong>
+The second wife used <strong>the declarative approach</strong>.</p>
+</div></aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 960px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Traits of Imperative and Declarative Paradigm
+
+- **The imperative style grants a lot of control**. You tell the program a list of things to do. 
+	The program follows it and returns the result.
+
+- **The declarative style is much more lenient**. You tell the program a rough outline of the result. 
+	The program figures out the steps and tries its best to return the result.
+
+<div class="callout callout-color2">
+<div class="callout-title">
+<div class="callout-icon">
+
+<i class="fas fa-fire-alt" ></i>
+
+
+</div>
+<div class="callout-title-inner">
+
+Important
+
+</div>
+</div>
+<div class="callout-content">
+
+That is not to say that one is better than the other.
+
+As I said before, **it boils down to matters of preference**.
+
+</div>
+</div>
+
+That should be enough detail. 
+Let's look at some practical codes .
+
+## Useful Programs in Imperative and Declarative Style
+
+### Computing N-th Fibbonacci Number
+
+Everyone knows about the Fibonacci numbers, correct?
+We will write a function that will calculate the n-th Fibonacci number.
+
+This is my imperative solution written in **C**.
+I tell the computer precisely **how to obtain the result**. 
+
+```c
+int fibonacci(int n) {
+  int a = 0;
+  int b = 1;
+  int temp;
+  
+  while (n--) {
+    temp = a + b;  
+    a = b;
+    b = temp;
+  }
+  
+  return a;
+}
+```
+
+And this is my declarative solution written in **Haskell**. 
+I tell the computer what an n-th fibonacci condition looks like, and some conditions.
+
+```haskell
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+```
+
+Notice that it calls itself. 
+This type of function is called a recursive function, by the way.
+
+## Summary
+
+That just wrapped things up for me. I want to give a summary before I finish this talk.
+
+- A programming paradigm is just the way you write your code.
+- The imperative style tells the computer how to obtain the result.
+- The declarative style tells the computer what the result should be.
+
+## Ask me Questions!
+</div></script></section></section></div>
     </div>
 
-    <script src="./dist/reveal.js"></script>
-    <script src="./plugin/zoom/zoom.js"></script>
-    <script src="./plugin/notes/notes.js"></script>
-    <script src="./plugin/search/search.js"></script>
-    <script src="./plugin/markdown/markdown.js"></script>
-    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
     <script>
-      // Also available as an ES module, see:
-      // https://revealjs.com/initialization/
-      Reveal.initialize({
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
         controls: true,
         progress: true,
+        history: true,
         center: true,
-        hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
+        transition: 'default', // none/fade/slide/convex/concave/zoom
         plugins: [
-          RevealZoom,
-          RevealNotes,
-          RevealSearch,
           RevealMarkdown,
           RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
         ],
-      });
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":1024,"margin":0.04,"controls":true,"progress":true,"slideNumber":true,"transition":"slide","transitionSpeed":"fast"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
     </script>
   </body>
+
+  <!-- created with Advanced Slides -->
 </html>
