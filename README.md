@@ -1,0 +1,2 @@
+# imperative-declarative-paradigm-talk
+ 
