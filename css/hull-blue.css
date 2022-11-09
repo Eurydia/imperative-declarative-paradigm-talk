@@ -225,7 +225,8 @@ body {
 
 .reveal code {
   font-family: monospace;
-  text-transform: none; }
+  text-transform: none; 
+  font-size: 1.15rem; }
 
 .reveal pre code {
   display: block;
